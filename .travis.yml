@@ -5,6 +5,14 @@ sudo: false
 php:
   - 7.0
 
+env:
+  - CACHE_NAME=$TRAVIS_BUILD_ID
+
+cache:
+  directories:
+    - $HOME/build
+    - $HOME/.composer/cache/files
+
 stages:
   - build
   - analyze
@@ -37,3 +45,4 @@ install:
   - composer --verbose install
   - pwd
   - cd ~ && pwd && cd -
+  - printenv
