@@ -13,6 +13,9 @@ cache:
     - $HOME/build
     - $HOME/.composer/cache/files
 
+services:
+  - mysql
+
 stages:
   - build
   - analyze
@@ -40,6 +43,7 @@ jobs:
 before_install:
   - composer --verbose self-update
   - composer --version
+  - mysql -e 'CREATE DATABASE myapp_test;'
 
 install:
   - composer --verbose install
