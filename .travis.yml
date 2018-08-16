@@ -26,7 +26,7 @@ jobs:
       script: touch test && ls -la
     - stage: analyze
       name: PHPCS
-      script: ./vendor/bin/phpcs -n
+      script: ./vendor/bin/phpcs -pn
     - stage: analyze
       name: Composer validate
       script: composer validate
