@@ -38,10 +38,13 @@ jobs:
     - stage: test
       name: Run tests
       install: cd $HOME/.cache/$TRAVIS_REPO_SLUG
-      script: 
-        - ./vendor/bin/drush si minimal
-        - curl web
-        - ./vendor/bin/behat
+      script:
+        - echo "<?php include \$app_root . '/' . \$site_path . '/settings.ci.php';" > web/sites/default/settings.local.php 
+        - docker-compose -f docker-compose.ci.yml up -d
+        - docker-compose -f docker-compose.ci.yml -f docker-compose.cli.yml run --rm cli /bin/sh -c "drush st"
+        - docker-compose -f docker-compose.ci.yml -f docker-compose.cli.yml run --rm cli /bin/sh -c "drush si minimal -y"
+        - curl web 
+        - docker-compose -f docker-compose.ci.yml -f docker-compose.cli.yml run --rm cli /bin/sh -c "./vendor/bin/behat"
 
 before_install:
   - composer --verbose self-update
