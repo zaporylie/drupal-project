@@ -27,6 +27,7 @@
         "webmozart/path-util": "^2.3"
     },
     "require-dev": {
+        "drupal/drupal-extension": "^3.4",
         "webflo/drupal-core-require-dev": "~8.5.3"
     },
     "conflict": {

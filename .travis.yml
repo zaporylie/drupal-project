@@ -19,7 +19,6 @@ services:
 stages:
   - build
   - analyze
-  - run
   - test
 
 jobs:
@@ -33,12 +32,11 @@ jobs:
     - stage: analyze
       name: Composer validate
       script: composer validate
-    - stage: run
-      name: Run
-      script: ./vendor/bin/drush si minimal
     - stage: test
-      name: Behat
-      script: ./vendor/bin/behat
+      name: Run tests
+      script: 
+        - ./vendor/bin/drush si minimal
+        - ./vendor/bin/behat
 
 before_install:
   - composer --verbose self-update
