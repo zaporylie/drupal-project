@@ -23,7 +23,8 @@ jobs:
     - stage: build
       name: Build
       install:
-        - cp -R $PWD $HOME/.cache
+        - mkdir -p $HOME/$TRAVIS_REPO_SLUG
+        - cp -a $HOME/$TRAVIS_REPO_SLUG/. $HOME/.cache/$TRAVIS_REPO_SLUG
         - cd $HOME/.cache && ls -la
       script: composer install
     - stage: analyze
