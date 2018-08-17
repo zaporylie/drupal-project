@@ -5,8 +5,8 @@ sudo: false
 php:
   - 7.0
 
-# env:
-#  - CACHE_NAME=$TRAVIS_BUILD_ID
+env:
+ - CACHE_NAME=$TRAVIS_BUILD_ID
 
 cache:
   directories:
