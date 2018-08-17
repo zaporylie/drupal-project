@@ -37,7 +37,9 @@ jobs:
       script: composer validate
     - stage: test
       name: Run tests
-      install: cd $HOME/.cache/$TRAVIS_REPO_SLUG
+      install: 
+        - cd $HOME/.cache/$TRAVIS_REPO_SLUG
+        - ls -la
       script:
         - echo "<?php include \$app_root . '/' . \$site_path . '/settings.ci.php';" > web/sites/default/settings.local.php 
         - docker-compose -f docker-compose.ci.yml up -d
