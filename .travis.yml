@@ -39,3 +39,4 @@ jobs:
 before_install:
   - composer --verbose self-update
   - composer --version
+  - printenv
