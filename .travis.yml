@@ -24,8 +24,8 @@ jobs:
       name: Build
       install:
         - mkdir -p $HOME/.cache/$TRAVIS_REPO_SLUG
-        - cp -a $HOME/$TRAVIS_REPO_SLUG/. $HOME/.cache/$TRAVIS_REPO_SLUG
-        - cd $HOME/.cache && ls -la
+        - cp -a $PWD/. $HOME/.cache/$TRAVIS_REPO_SLUG
+        - cd $HOME/.cache/$TRAVIS_REPO_SLUG && ls -la
       script: composer install
     - stage: analyze
       name: PHPCS
