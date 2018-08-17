@@ -13,9 +13,6 @@ cache:
     - $HOME/build
     - $HOME/.composer/cache/files
 
-services:
-  - mysql
-
 stages:
   - build
   - analyze
@@ -25,7 +22,7 @@ jobs:
   include:
     - stage: build
       name: Build
-      script: touch test && ls -la
+      script: composer install
     - stage: analyze
       name: PHPCS
       script: ./vendor/bin/phpcs -pn
@@ -36,15 +33,9 @@ jobs:
       name: Run tests
       script: 
         - ./vendor/bin/drush si minimal
+        - curl web
         - ./vendor/bin/behat
 
 before_install:
   - composer --verbose self-update
   - composer --version
-  - mysql -e 'CREATE DATABASE myapp_test;'
-
-install:
-  - composer --verbose install
-  - pwd
-  - cd ~ && pwd && cd -
-  - printenv

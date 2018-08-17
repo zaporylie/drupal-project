@@ -1,0 +1,2 @@
+*/1 * * * * drush --root=/var/www/html/web cron >> /var/log/cron.log 2>&1
+

@@ -1,0 +1,41 @@
+version: '3'
+
+services:
+  web:
+    image: drupaldocker/nginx:1.13-2.x
+    env_file:
+      - .env.ci
+    volumes:
+      - public-files:/var/www/html/web/sites/default/files
+      - tmp:/tmp
+      - ./:/var/www/html
+
+  php:
+    image: drupaldocker/php:7.0-fpm-2.x
+    env_file:
+      - .env.ci
+    volumes:
+      - public-files:/var/www/html/web/sites/default/files
+      - tmp:/tmp
+      - ./:/var/www/html
+
+  db:
+    image: drupaldocker/mariadb:10.3
+    env_file:
+      - .env.ci
+    volumes:
+      - db:/var/lib/mysql
+
+  cron:
+    build:
+      context: .
+      dockerfile: .docker/cron.Dockerfile
+    volumes:
+      - public-files:/var/www/html/web/sites/default/files
+      - tmp:/tmp
+      - ./:/var/www/html
+
+volumes:
+  public-files:
+  tmp:
+  db:

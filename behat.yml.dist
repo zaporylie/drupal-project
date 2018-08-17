@@ -1,0 +1,27 @@
+default:
+  suites:
+    default:
+      paths:
+        features: %paths.base%/behat/features
+      filters:
+        tags: "~@todo"
+      contexts:
+        - Drupal\DrupalExtension\Context\MinkContext
+        - Drupal\DrupalExtension\Context\MarkupContext
+        - Drupal\DrupalExtension\Context\MessageContext
+        - Drupal\DrupalExtension\Context\DrushContext
+        - Drupal\DrupalExtension\Context\DrupalContext
+  extensions:
+    Behat\MinkExtension:
+      files_path: %paths.base%/behat/files
+      base_url: http://web
+      selenium2: ~
+      goutte: ~
+    Drupal\DrupalExtension:
+      drush:
+        root: %paths.base%:/web
+      blackbox: ~
+      drupal:
+        drupal_root: %paths.base%/web
+      api_driver: 'drupal'
+
