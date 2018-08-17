@@ -5,13 +5,13 @@ sudo: false
 php:
   - 7.0
 
-env:
-  - CACHE_NAME=$TRAVIS_BUILD_ID
+# env:
+#  - CACHE_NAME=$TRAVIS_BUILD_ID
 
 cache:
   directories:
-    - $HOME/build
-    - $HOME/.composer/cache/files
+    - $HOME/cache
+    - $HOME/.composer/cache/
 
 stages:
   - build
@@ -22,15 +22,22 @@ jobs:
   include:
     - stage: build
       name: Build
+      install:
+        - mkdir $HOME/cache
+        - cp -R $PWD $HOME/cache
+        - cd $HOME/cache && ls -la
       script: composer install
     - stage: analyze
       name: PHPCS
+      install: cd $HOME/cache
       script: ./vendor/bin/phpcs -pn
     - stage: analyze
       name: Composer validate
+      install: cd $HOME/cache
       script: composer validate
     - stage: test
       name: Run tests
+      install: cd $HOME/cache
       script: 
         - ./vendor/bin/drush si minimal
         - curl web
