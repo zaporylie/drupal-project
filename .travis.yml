@@ -29,15 +29,15 @@ jobs:
       script: composer install
     - stage: analyze
       name: PHPCS
-      install: cd $HOME/cache
+      install: cd $HOME/.cache/$TRAVIS_REPO_SLUG
       script: ./vendor/bin/phpcs -pn
     - stage: analyze
       name: Composer validate
-      install: cd $HOME/cache
+      install: cd $HOME/.cache/$TRAVIS_REPO_SLUG
       script: composer validate
     - stage: test
       name: Run tests
-      install: cd $HOME/cache
+      install: cd $HOME/.cache/$TRAVIS_REPO_SLUG
       script: 
         - ./vendor/bin/drush si minimal
         - curl web
