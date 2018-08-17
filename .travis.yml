@@ -10,7 +10,7 @@ php:
 
 cache:
   directories:
-    - $HOME/cache
+    - $HOME/.cache
     - $HOME/.composer/cache/
 
 stages:
@@ -23,9 +23,8 @@ jobs:
     - stage: build
       name: Build
       install:
-        - mkdir $HOME/cache
-        - cp -R $PWD $HOME/cache
-        - cd $HOME/cache && ls -la
+        - cp -R $PWD $HOME/.cache
+        - cd $HOME/.cache && ls -la
       script: composer install
     - stage: analyze
       name: PHPCS
